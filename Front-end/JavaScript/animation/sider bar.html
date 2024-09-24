@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sider Bar</title>
+        <style type="text/css">
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            
+            #bar{
+                width: 200px;
+                height: 200px;
+                background-color: pink;
+                position: relative;
+                left: -200px;
+            }
+            #bar span{
+                width: 50px;
+                height: 50px;
+                background-color: rgb(163, 110, 110);
+                position: absolute;
+                top: 50px;
+                right: -50px;
+                top : 50%;
+                margin-top: -30px;
+                text-align: center;
+                line-height: 50px;
+            }
+            
+        </style>
+    </head>
+
+    <body>
+        <div id="bar">
+            <span>pull</span>
+        </div>
+        <script type="text/javascript">
+            window.onload = function(){
+                var timer = null;
+                var oDIV = document.getElementById('bar');
+                var speed = 0;
+                
+                
+
+
+                oDIV.onmouseover = function(){
+                    clearInterval(timer);
+                    // Move the box left
+                    timer = setInterval(function(){
+                        if(oDIV.offsetLeft === 0){
+                            clearInterval(timer);
+                            return;
+                        }
+                        oDIV.style.left = oDIV.offsetLeft + speed + 'px'; 
+                    },10);
+                }
+
+                oDIV.onmouseout = function(){
+                    clearInterval(timer);
+                    // Move the box right
+                    timer = setInterval(function(){
+                        if(oDIV.offsetLeft <= -200){
+                            clearInterval(timer);
+                        }else{
+                            oDIV.style.left = oDIV.offsetLeft - speed + 'px';
+                        }
+                    },10);
+                }
+            }
+        
+        </script>
+</html>
