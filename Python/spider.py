@@ -53,3 +53,5 @@ try:
         askUrl("http://www.people.com.cn/")
 except Exception as error_type:
     print(f"{error_type}")
+
+
