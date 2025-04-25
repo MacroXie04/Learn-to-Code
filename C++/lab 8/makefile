@@ -1,5 +1,5 @@
 # This is a simple makefile for C++ projects.
-TARGET = main
+TARGET = part2
 
 # 目录设置
 SRC_DIR = src

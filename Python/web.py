@@ -1,19 +1,19 @@
-# -*- codeing = utf-8 -*-
-# @Time : 7/22/23 11:25 PM
-# @Author : Hongzhe Xie
-# @File : web.py
-# @Software : PyCharm
+import socket
 
-from flask import Flask
-from flask import render_template
-app = Flask(__name__)
+ip = "34.116.68.59"
+start_port = 61000
+end_port = 61500
+message = b"EMU"
 
-# 网站地址和函数之间的链接
-@app.route('/show/info')
-def index():
-    return render_template('index.html')
-
-
-
-if __name__ == '__main__':
-    app.run()
+for port in range(start_port, end_port + 1):
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.settimeout(1.5)
+            s.connect((ip, port))
+            s.sendall(message)
+            data = s.recv(1024)
+            if data:
+                print(f"[+] Port {port} responded: {data.decode()}")
+    except Exception as e: 
+        print(f"[-] Port {port} failed: {e}")
+        continue
